@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ALKANSA - Potencializando Resultados Digitais</title>
+  <!-- Fonte do Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Biblioteca para ícones (opcional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Reset e estilos básicos */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Loading Spinner */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #ff7f50;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Animação Fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Efeito scale-on-hover para elementos específicos */
+    .scale-on-hover {
+      transition: transform 0.3s;
+    }
+
+    .scale-on-hover:hover {
+      transform: scale(1.05);
+    }
+
+    /* Cabeçalho */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav li {
+      font-size: 1rem;
+      position: relative;
+      transition: font-weight 0.3s;
+    }
+
+    /* Itens do menu ficam em negrito ao passar o mouse */
+    nav li:hover {
+      font-weight: bold;
+    }
+
+    nav li::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: #ff7f50;
+      transition: width 0.3s;
+    }
+
+    nav li:hover::after {
+      width: 100%;
+    }
+
+    .cta-header {
+      padding: 0.6rem 1.2rem;
+      background-color: #ff7f50;
+      color: #fff;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .cta-header:hover {
+      background-color: #ff6333;
+      transform: scale(1.05);
+    }
+
+    /* Seção Hero com efeito parallax via JS */
+    .hero {
+      background: url('https://i.postimg.cc/vZc0qcmB/19187762.jpg') center/cover;
+      color: #fff;
+      text-align: center;
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150%;
+      height: 150%;
+      background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.05), transparent 70%);
+      transform: rotate(25deg) translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-buttons a {
+      padding: 0.8rem 1.5rem;
+      background-color: #ff7f50;
+      color: #fff;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .cta-buttons a:hover {
+      background-color: #ff6333;
+      transform: scale(1.05);
+    }
+
+    /* Seção Sobre */
+    .about {
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .about p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* Seção Pilares */
+    .pillars {
+      background-color: #f9f9f9;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .pillars h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .pillar-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .pillar {
+      flex: 1 1 250px;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .pillar h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #ff7f50;
+    }
+
+    .pillar p {
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    /* Seção Serviços (Layout em grade) */
+    .services {
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .services h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .service-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .card {
+      flex: 1 1 280px;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .card a {
+      padding: 0.6rem 1.2rem;
+      background-color: #ff7f50;
+      color: #fff;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .card a:hover {
+      background-color: #ff6333;
+      transform: scale(1.05);
+    }
+
+    /* Seção Depoimentos com Slider */
+    .testimonials {
+      background: #f9f9f9;
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonials h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      flex-shrink: 0;
+    }
+
+    .testimonial-container {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      padding: 0 1rem;
+    }
+
+    .testimonial {
+      flex: 1 1 300px;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .slider-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 1rem;
+      pointer-events: none;
+    }
+
+    .slider-controls button {
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 50%;
+      transition: background 0.3s;
+      pointer-events: all;
+    }
+
+    .slider-controls button:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Seção Contato com Formulário */
+    .contact {
+      padding: 3rem 2rem;
+      text-align: center;
+      background: #fff;
+    }
+
+    .contact h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact input,
+    .contact textarea {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .contact textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact button {
+      padding: 0.8rem;
+      background-color: #ff7f50;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .contact button:hover {
+      background-color: #ff6333;
+      transform: scale(1.05);
+    }
+
+    /* Seção CTA Final */
+    .cta-final {
+      background-color: #1a1a1a;
+      color: #fff;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .cta-final h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-final a {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: #ff7f50;
+      color: #fff;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+      margin-top: 1rem;
+    }
+
+    .cta-final a:hover {
+      background-color: #ff6333;
+      transform: scale(1.05);
+    }
+
+    /* Rodapé */
+    footer {
+      background: #333;
+      color: #ccc;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #ff7f50;
+      margin: 0 0.5rem;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #ff6333;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .pillar-container,
+      .testimonial-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Loading Spinner -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Cabeçalho -->
+  <header class="fade-in">
+    <img class="logo" src="https://i.postimg.cc/G47jfmFY/alkansa-logo-04.png" />
+    <nav>
+      <ul>
+        <li><a href="#hero">Início</a></li>
+        <li><a href="#about">Sobre</a></li>
+        <li><a href="#pillars">Pilares</a></li>
+        <li><a href="#services">Serviços</a></li>
+        <li><a href="#testimonials">Cases</a></li>
+        <li><a href="#contact">Contato</a></li>
+      </ul>
+    </nav>
+    <a class="cta-header scale-on-hover" href="#contact">Fale Conosco</a>
+  </header>
+
+  <!-- Seção Hero -->
+  <section class="hero fade-in" id="hero">
+    <h1>ALKANSA: Potencializando Resultados Digitais</h1>
+    <p>Transformamos tráfego pago em crescimento real para o seu negócio.</p>
+    <div class="cta-buttons">
+      <a href="#contact" class="scale-on-hover">Solicite uma Consultoria</a>
+      <a href="#testimonials" class="scale-on-hover">Veja Nossos Cases</a>
+    </div>
+  </section>
+
+  <!-- Seção Sobre -->
+  <section class="about fade-in" id="about">
+    <h2>Sobre a ALKANSA</h2>
+    <p>Somos uma agência especializada em tráfego pago, focada em impulsionar o crescimento digital dos nossos clientes.
+      Nossa missão é transformar cliques em resultados mensuráveis através de estratégias modernas e eficazes.</p>
+  </section>
+
+  <!-- Seção Pilares -->
+  <section class="pillars fade-in" id="pillars">
+    <h2>Nossos Pilares</h2>
+    <div class="pillar-container">
+      <div class="pillar">
+        <h3>Agilidade</h3>
+        <p>Responder rapidamente às mudanças do mercado e adaptar estratégias de tráfego pago com flexibilidade e
+          dinamismo.</p>
+      </div>
+      <div class="pillar">
+        <h3>Alcance</h3>
+        <p>Expandir a presença digital das marcas, atingindo o público certo e potencializando a visibilidade e o
+          engajamento.</p>
+      </div>
+      <div class="pillar">
+        <h3>Assertividade</h3>
+        <p>Focar em decisões baseadas em dados e na precisão das ações, garantindo que cada investimento gere resultados
+          mensuráveis.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Serviços (Layout em Grade) -->
+  <section class="services fade-in" id="services">
+    <h2>Nossas Soluções em Tráfego Pago</h2>
+    <div class="service-cards">
+      <div class="card scale-on-hover">
+        <h3>Google Ads</h3>
+        <p>Anúncios otimizados para alcançar clientes no momento certo e maximizar seu ROI.</p>
+        <a href="#contact">Saiba Mais</a>
+      </div>
+      <div class="card scale-on-hover">
+        <h3>Facebook & Instagram Ads</h3>
+        <p>Campanhas segmentadas para aumentar o engajamento e a conversão em redes sociais.</p>
+        <a href="#contact">Saiba Mais</a>
+      </div>
+      <div class="card scale-on-hover">
+        <h3>Remarketing</h3>
+        <p>Recapturamos visitantes e transformamos interesse em conversões através de estratégias precisas.</p>
+        <a href="#contact">Saiba Mais</a>
+      </div>
+      <div class="card scale-on-hover">
+        <h3>Consultoria & Otimização</h3>
+        <p>Análise contínua de dados para ajustar e aprimorar campanhas, garantindo resultados superiores.</p>
+        <a href="#contact">Saiba Mais</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Depoimentos com Slider -->
+  <section class="testimonials fade-in" id="testimonials">
+    <h2>Histórias de Sucesso</h2>
+    <div class="slider" id="testimonial-slider">
+      <div class="slide">
+        <div class="testimonial scale-on-hover">
+          <p>"A ALKANSA transformou nossa estratégia digital. Os resultados são visíveis e os cliques se converteram em
+            vendas reais." - Cliente Satisfeito</p>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="testimonial scale-on-hover">
+          <p>"Campanhas inteligentes e personalizadas que alavancaram nosso negócio. Recomendo fortemente!" - Cliente
+            Satisfeito</p>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="testimonial scale-on-hover">
+          <p>"Com a ALKANSA, cada clique se torna uma oportunidade de crescimento. A equipe é extremamente
+            profissional." - Cliente Satisfeito</p>
+        </div>
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button id="prev-testimonial" aria-label="Anterior"><i class="fa fa-chevron-left"></i></button>
+      <button id="next-testimonial" aria-label="Próximo"><i class="fa fa-chevron-right"></i></button>
+    </div>
+  </section>
+
+  <!-- Seção Contato com Formulário -->
+  <section class="contact fade-in" id="contact">
+    <h2>Fale Conosco</h2>
+    <!-- Formulário integrado com Formspree -->
+    <form id="contact-form" action="https://formspree.io/f/xnnjzpro" method="POST">
+      <input type="text" name="name" placeholder="Seu Nome" required>
+      <input type="email" name="email" placeholder="Seu E-mail" required>
+      <textarea name="message" placeholder="Sua Mensagem" required></textarea>
+      <button type="submit" class="scale-on-hover">Enviar Mensagem</button>
+    </form>
+  </section>
+
+  <!-- Seção CTA Final -->
+  <section class="cta-final fade-in">
+    <h2>Pronto para transformar o desempenho digital da sua empresa?</h2>
+    <a href="#contact" class="scale-on-hover">Solicite uma Consultoria Gratuita</a>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="fade-in">
+    <p>&copy; 2025 ALKANSA. Todos os direitos reservados.</p>
+    <p>
+      <a href="#hero">Início</a> |
+      <a href="#about">Sobre</a> |
+      <a href="#services">Serviços</a> |
+      <a href="#pillars">Pilares</a> |
+      <a href="#testimonials">Cases</a> |
+      <a href="#contact">Contato</a>
+    </p>
+    <p>
+      Siga-nos:
+      <a href="https://www.instagram.com/alkansa_digital/" target="_blank">Instagram</a> |
+      <a href="https://www.linkedin.com/company/alkansa-digital/posts/?feedView=all" target="_blank">LinkedIn</a> |
+      <a href="https://www.facebook.com/profile.php?id=61573037062299" target="_blank">Facebook</a>
+    </p>
+  </footer>
+
+  <!-- JavaScript para Smooth Scroll, Fade-in e Slider -->
+  <script>
+    // Smooth scroll para links âncora
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Intersection Observer para efeito de fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Slider para Depoimentos
+    const testimonialSlider = document.getElementById('testimonial-slider');
+    const testimonialSlides = testimonialSlider.querySelectorAll('.slide');
+    let currentTestimonialSlide = 0;
+    function showTestimonialSlide(index) {
+      if (index < 0) { currentTestimonialSlide = testimonialSlides.length - 1; }
+      else if (index >= testimonialSlides.length) { currentTestimonialSlide = 0; }
+      else { currentTestimonialSlide = index; }
+      testimonialSlider.style.transform = 'translateX(' + (-currentTestimonialSlide * 100) + '%)';
+    }
+    document.getElementById('prev-testimonial').addEventListener('click', () => {
+      showTestimonialSlide(currentTestimonialSlide - 1);
+    });
+    document.getElementById('next-testimonial').addEventListener('click', () => {
+      showTestimonialSlide(currentTestimonialSlide + 1);
+    });
+    // Auto slide para depoimentos a cada 5 segundos
+    setInterval(() => {
+      showTestimonialSlide(currentTestimonialSlide + 1);
+    }, 5000);
+
+    // Parallax effect na seção Hero
+    window.addEventListener('scroll', () => {
+      const hero = document.getElementById('hero');
+      const offset = window.pageYOffset;
+      // Ajuste o fator (0.5) conforme necessário para intensificar o efeito
+      hero.style.backgroundPositionY = offset * 0.5 + "px";
+    });
+
+    // Remove o loading spinner após a página carregar
+    window.addEventListener('load', () => {
+      document.getElementById('loader').style.display = 'none';
+    });
+  </script>
+
+  <!-- Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyCPgft26E_Kp0vT6aVrxqZU9v9FEqOo7Cc",
+      authDomain: "alkansa-66d32.firebaseapp.com",
+      projectId: "alkansa-66d32",
+      storageBucket: "alkansa-66d32.firebasestorage.app",
+      messagingSenderId: "179911099952",
+      appId: "1:179911099952:web:da328dcd94512a636dcff5",
+      measurementId: "G-3RVBMSH0E1"
+    };
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+
+  <!-- Google Analytics (Exemplo: substitua 'UA-XXXXX-Y' pelo seu ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-XXXXX-Y');
+  </script>
+</body>
+
+</html>
