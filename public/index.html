@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ALKANSA - Potencializando Resultados Digitais</title>
+  <link rel="icon" href="images/favicon-16x16.png" type="image/x-icon">
+  <title>ALKANSA</title>
   <!-- Fonte do Google -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Biblioteca para ícones (opcional) -->
@@ -153,16 +154,16 @@
     }
 
     /* Seção Hero com efeito parallax via JS */
-    .hero {
+    .about {
       background: url('https://i.postimg.cc/vZc0qcmB/19187762.jpg') center/cover;
       color: #fff;
       text-align: center;
-      padding: 5rem 2rem;
+      padding: 15rem 5rem;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::after {
+    .about::after {
       content: "";
       position: absolute;
       top: 0;
@@ -174,12 +175,12 @@
       pointer-events: none;
     }
 
-    .hero h1 {
+    .about h1 {
       font-size: 2.8rem;
       margin-bottom: 1rem;
     }
 
-    .hero p {
+    .about p {
       font-size: 1.2rem;
       margin-bottom: 2rem;
     }
@@ -203,24 +204,6 @@
     .cta-buttons a:hover {
       background-color: #ff6333;
       transform: scale(1.05);
-    }
-
-    /* Seção Sobre */
-    .about {
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    .about h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .about p {
-      max-width: 800px;
-      margin: 0 auto;
-      font-size: 1rem;
-      color: #555;
     }
 
     /* Seção Pilares */
@@ -317,20 +300,6 @@
     .card a:hover {
       background-color: #ff6333;
       transform: scale(1.05);
-    }
-
-    /* Seção Depoimentos com Slider */
-    .testimonials {
-      background: #f9f9f9;
-      padding: 3rem 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .testimonials h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
     }
 
     .slider {
@@ -512,52 +481,41 @@
     <img class="logo" src="https://i.postimg.cc/G47jfmFY/alkansa-logo-04.png" />
     <nav>
       <ul>
-        <li><a href="#hero">Início</a></li>
         <li><a href="#about">Sobre</a></li>
         <li><a href="#pillars">Pilares</a></li>
         <li><a href="#services">Serviços</a></li>
-        <li><a href="#testimonials">Cases</a></li>
         <li><a href="#contact">Contato</a></li>
       </ul>
     </nav>
     <a class="cta-header scale-on-hover" href="#contact">Fale Conosco</a>
   </header>
 
-  <!-- Seção Hero -->
-  <section class="hero fade-in" id="hero">
-    <h1>ALKANSA: Potencializando Resultados Digitais</h1>
-    <p>Transformamos tráfego pago em crescimento real para o seu negócio.</p>
+  <!-- Seção About -->
+  <section class="about fade-in" id="about">
+    <h1>Potencializando Resultados Digitais</h1>
+    <p>Somos uma agência de tráfego pago, especializada em ampliar a visibilidade dos seus clientes. Criamos campanhas inteligentes que fortalecem sua marca, aumentam seus leads e garantem um crescimento real e consistente.</p>
     <div class="cta-buttons">
       <a href="#contact" class="scale-on-hover">Solicite uma Consultoria</a>
-      <a href="#testimonials" class="scale-on-hover">Veja Nossos Cases</a>
     </div>
-  </section>
-
-  <!-- Seção Sobre -->
-  <section class="about fade-in" id="about">
-    <h2>Sobre a ALKANSA</h2>
-    <p>Somos uma agência especializada em tráfego pago, focada em impulsionar o crescimento digital dos nossos clientes.
-      Nossa missão é transformar cliques em resultados mensuráveis através de estratégias modernas e eficazes.</p>
   </section>
 
   <!-- Seção Pilares -->
   <section class="pillars fade-in" id="pillars">
     <h2>Nossos Pilares</h2>
     <div class="pillar-container">
-      <div class="pillar">
+      <div class="pillar scale-on-hover">
         <h3>Agilidade</h3>
         <p>Responder rapidamente às mudanças do mercado e adaptar estratégias de tráfego pago com flexibilidade e
           dinamismo.</p>
       </div>
-      <div class="pillar">
+      <div class="pillar scale-on-hover">
         <h3>Alcance</h3>
         <p>Expandir a presença digital das marcas, atingindo o público certo e potencializando a visibilidade e o
           engajamento.</p>
       </div>
-      <div class="pillar">
+      <div class="pillar scale-on-hover">
         <h3>Assertividade</h3>
-        <p>Focar em decisões baseadas em dados e na precisão das ações, garantindo que cada investimento gere resultados
-          mensuráveis.</p>
+        <p>Focar em decisões baseadas em dados e na precisão das ações, fornecendo relatórios completos sobre o desempenho de cada campanha.</p>
       </div>
     </div>
   </section>
@@ -572,13 +530,8 @@
         <a href="#contact">Saiba Mais</a>
       </div>
       <div class="card scale-on-hover">
-        <h3>Facebook & Instagram Ads</h3>
+        <h3>Meta Ads</h3>
         <p>Campanhas segmentadas para aumentar o engajamento e a conversão em redes sociais.</p>
-        <a href="#contact">Saiba Mais</a>
-      </div>
-      <div class="card scale-on-hover">
-        <h3>Remarketing</h3>
-        <p>Recapturamos visitantes e transformamos interesse em conversões através de estratégias precisas.</p>
         <a href="#contact">Saiba Mais</a>
       </div>
       <div class="card scale-on-hover">
@@ -586,35 +539,6 @@
         <p>Análise contínua de dados para ajustar e aprimorar campanhas, garantindo resultados superiores.</p>
         <a href="#contact">Saiba Mais</a>
       </div>
-    </div>
-  </section>
-
-  <!-- Seção Depoimentos com Slider -->
-  <section class="testimonials fade-in" id="testimonials">
-    <h2>Histórias de Sucesso</h2>
-    <div class="slider" id="testimonial-slider">
-      <div class="slide">
-        <div class="testimonial scale-on-hover">
-          <p>"A ALKANSA transformou nossa estratégia digital. Os resultados são visíveis e os cliques se converteram em
-            vendas reais." - Cliente Satisfeito</p>
-        </div>
-      </div>
-      <div class="slide">
-        <div class="testimonial scale-on-hover">
-          <p>"Campanhas inteligentes e personalizadas que alavancaram nosso negócio. Recomendo fortemente!" - Cliente
-            Satisfeito</p>
-        </div>
-      </div>
-      <div class="slide">
-        <div class="testimonial scale-on-hover">
-          <p>"Com a ALKANSA, cada clique se torna uma oportunidade de crescimento. A equipe é extremamente
-            profissional." - Cliente Satisfeito</p>
-        </div>
-      </div>
-    </div>
-    <div class="slider-controls">
-      <button id="prev-testimonial" aria-label="Anterior"><i class="fa fa-chevron-left"></i></button>
-      <button id="next-testimonial" aria-label="Próximo"><i class="fa fa-chevron-right"></i></button>
     </div>
   </section>
 
@@ -633,18 +557,16 @@
   <!-- Seção CTA Final -->
   <section class="cta-final fade-in">
     <h2>Pronto para transformar o desempenho digital da sua empresa?</h2>
-    <a href="#contact" class="scale-on-hover">Solicite uma Consultoria Gratuita</a>
+    <img src="https://i.postimg.cc/8zz1F1KV/alkansa-logo-01.webp" style="width: 10%; height: auto;" />
   </section>
 
   <!-- Rodapé -->
   <footer class="fade-in">
     <p>&copy; 2025 ALKANSA. Todos os direitos reservados.</p>
     <p>
-      <a href="#hero">Início</a> |
       <a href="#about">Sobre</a> |
       <a href="#services">Serviços</a> |
       <a href="#pillars">Pilares</a> |
-      <a href="#testimonials">Cases</a> |
       <a href="#contact">Contato</a>
     </p>
     <p>
@@ -680,33 +602,12 @@
       observer.observe(el);
     });
 
-    // Slider para Depoimentos
-    const testimonialSlider = document.getElementById('testimonial-slider');
-    const testimonialSlides = testimonialSlider.querySelectorAll('.slide');
-    let currentTestimonialSlide = 0;
-    function showTestimonialSlide(index) {
-      if (index < 0) { currentTestimonialSlide = testimonialSlides.length - 1; }
-      else if (index >= testimonialSlides.length) { currentTestimonialSlide = 0; }
-      else { currentTestimonialSlide = index; }
-      testimonialSlider.style.transform = 'translateX(' + (-currentTestimonialSlide * 100) + '%)';
-    }
-    document.getElementById('prev-testimonial').addEventListener('click', () => {
-      showTestimonialSlide(currentTestimonialSlide - 1);
-    });
-    document.getElementById('next-testimonial').addEventListener('click', () => {
-      showTestimonialSlide(currentTestimonialSlide + 1);
-    });
-    // Auto slide para depoimentos a cada 5 segundos
-    setInterval(() => {
-      showTestimonialSlide(currentTestimonialSlide + 1);
-    }, 5000);
-
     // Parallax effect na seção Hero
     window.addEventListener('scroll', () => {
-      const hero = document.getElementById('hero');
+      const about = document.getElementById('about');
       const offset = window.pageYOffset;
       // Ajuste o fator (0.5) conforme necessário para intensificar o efeito
-      hero.style.backgroundPositionY = offset * 0.5 + "px";
+      about.style.backgroundPositionY = offset * 0.5 + "px";
     });
 
     // Remove o loading spinner após a página carregar
