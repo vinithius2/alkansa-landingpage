@@ -175,9 +175,17 @@
       pointer-events: none;
     }
 
+    /* Tamanho padrão para desktop */
     .about h1 {
       font-size: 2.8rem;
       margin-bottom: 1rem;
+    }
+
+    /* Comportamento para telas menores (smartphones) */
+    @media (max-width: 768px) {
+      .about h1 {
+        font-size: 8vw;
+      }
     }
 
     .about p {
@@ -492,8 +500,9 @@
 
   <!-- Seção About -->
   <section class="about fade-in" id="about">
-    <h1>Potencializando Resultados Digitais</h1>
-    <p>Somos uma agência de tráfego pago, especializada em ampliar a visibilidade dos seus clientes. Criamos campanhas inteligentes que fortalecem sua marca, aumentam seus leads e garantem um crescimento real e consistente.</p>
+    <h1 style="text-align: center;">Potencializando Resultados Digitais</h1>
+    <p>Somos uma agência de tráfego pago, especializada em ampliar a visibilidade dos seus clientes. Criamos campanhas
+      inteligentes que fortalecem sua marca, aumentam seus leads e garantem um crescimento real e consistente.</p>
     <div class="cta-buttons">
       <a href="#contact" class="scale-on-hover">Solicite uma Consultoria</a>
     </div>
@@ -515,7 +524,8 @@
       </div>
       <div class="pillar scale-on-hover">
         <h3>Assertividade</h3>
-        <p>Focar em decisões baseadas em dados e na precisão das ações, fornecendo relatórios completos sobre o desempenho de cada campanha.</p>
+        <p>Focar em decisões baseadas em dados e na precisão das ações, fornecendo relatórios completos sobre o
+          desempenho de cada campanha.</p>
       </div>
     </div>
   </section>
